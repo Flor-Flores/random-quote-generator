@@ -37,22 +37,34 @@ const quotes = [
   }
 ];
 
+//*** i added a random number funtion to use on the quote generator and color generator  ***
+// random number generator. It takes the highest number as a parameter.
+function getRandomNumber (highNum){
+  let randomNumber = Math.floor(Math.random() * highNum);+ 1; 
+  return randomNumber;
+}
+
 
 /***
  * `getRandomQuote` function
 ***/
-// takes as a parameter an array, and uses that array.length to generate a random. 
-// It then uses this random number to access an object from the array by its index value.
+
+// takes as a parameter an array (quotes)
+// and uses that array.length to  pass the highNum argument to the getRandomNumber to access an object from quotes array by its index value.
 function getRandomQuote(quotes){
-  let randomQuoteNumber = Math.floor(Math.random() * quotes.length); + 1; 
-  return quotes[randomQuoteNumber];
+  return quotes[getRandomNumber(quotes.length)];
+}
+
+// **exccedes** created a random rgb generator to change the backgroundColor every time a quote loads. 
+function getRandomRGBColor(){
+  const randomColor = `rgb(${getRandomNumber(255)},${getRandomNumber(255)},${getRandomNumber(255)})`;
+  return randomColor;
 }
 
 
 /***
  * `printQuote` function
 ***/
-
 function printQuote(){
  const randomQuote = getRandomQuote(quotes);
  let html = `
@@ -64,26 +76,31 @@ function printQuote(){
   if(randomQuote.year){
     html += `<span class="year"> ${randomQuote.year}</span>`;
   }
-  //Exceeds At least one additional property prints to the page with the its quote
-  //prit tags if available by passing the .join method to the tags array.
-  if(randomQuote.tags){
-    html += `<span class="tags"> ${randomQuote.tags.join(', ')} </span>`;
 
+  //**Exceeds** At least one additional property prints to the page with it's quote
+  //print 'tags' if available by passing the .join method to the tags array.
+  if(randomQuote.tags){
+    html += `<br><span class="tag"> ${randomQuote.tags.join(', ')} </span>`;
   }
+
   html+= `</p>`;
   document.getElementById('quote-box').innerHTML = html; 
+
+  //** exccedes: Background color changes to a random color each time the quote refreshes
+  document.body.style.backgroundColor = getRandomRGBColor();
   }
 
-// call the printQuote as soon as the page opents to start with one of our random quotes instead of the hard coded quote.
+// call the printQuote as soon as the page opens to start with one of our random quotes instead of the hard coded quote.
 printQuote();
+
 //**exccedes** Quotes automatically refresh at regular intervals (reference https://www.w3schools.com/jsref/met_win_setinterval.asp
 // it takes the interval amount as argument.
 function myAutoQuote(interval){
- setInterval(printQuote, interval);
+  setInterval(printQuote, interval);
 }
 
 // invoke the myAutoQuote with the time in milliseconds as an argument.
-myAutoQuote(4000);
+myAutoQuote(10000);
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
