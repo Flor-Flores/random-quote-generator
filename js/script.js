@@ -55,21 +55,22 @@ function printQuote(){
  let html = `
   <p class="quote"> ${randomQuote.quote} </p>
   <p class="source"> ${randomQuote.source}`;
-    if(randomQuote.citation){
-      html += `<span class="citation"> ${randomQuote.citation} </span>`;
-    }
-    if(randomQuote.year){
-      html += `<span class="year"> ${randomQuote.year} </span>`;
-    }
-    html+= `</p>`;
-    return html;
-}
+  if(randomQuote.citation){
+    html += `<span class="citation"> ${randomQuote.citation}</span>`;
+  }
+  if(randomQuote.year){
+    html += `<span class="year"> ${randomQuote.year}</span>`;
+  }
+  html+= `</p>`;
+  document.getElementById('quote-box').innerHTML = html; 
+  }
 
-console.log(printQuote());
-console.log(printQuote());
+// call the printQuote as soon as the page opents to start with one of our random quotes instead of the hard coded quote.
+printQuote();
+
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
-// document.getElementById('load-quote').addEventListener("click", printQuote, false);
+document.getElementById('load-quote').addEventListener("click", printQuote, false);
