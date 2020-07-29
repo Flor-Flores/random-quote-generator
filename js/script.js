@@ -10,6 +10,7 @@ project 1 - A Random Quote Generator
 /*** 
  * `quotes` array 
 ***/
+// these quotes are mostly about quotes! 🙃
 const quotes = [
   {
     source : "Takyou Allah Cheikh Malaynine",
@@ -40,11 +41,13 @@ const quotes = [
 /***
  * `getRandomQuote` function
 ***/
-
+// takes as a parameter an array, and uses that array.length to generate a random. 
+// It then uses this random number to access an object from the array by its index value.
 function getRandomQuote(quotes){
   let randomQuoteNumber = Math.floor(Math.random() * quotes.length); + 1; 
   return quotes[randomQuoteNumber];
 }
+
 
 /***
  * `printQuote` function
@@ -61,13 +64,26 @@ function printQuote(){
   if(randomQuote.year){
     html += `<span class="year"> ${randomQuote.year}</span>`;
   }
+  //Exceeds At least one additional property prints to the page with the its quote
+  //prit tags if available by passing the .join method to the tags array.
+  if(randomQuote.tags){
+    html += `<span class="tags"> ${randomQuote.tags.join(', ')} </span>`;
+
+  }
   html+= `</p>`;
   document.getElementById('quote-box').innerHTML = html; 
   }
 
 // call the printQuote as soon as the page opents to start with one of our random quotes instead of the hard coded quote.
 printQuote();
+//**exccedes** Quotes automatically refresh at regular intervals (reference https://www.w3schools.com/jsref/met_win_setinterval.asp
+// it takes the interval amount as argument.
+function myAutoQuote(interval){
+ setInterval(printQuote, interval);
+}
 
+// invoke the myAutoQuote with the time in milliseconds as an argument.
+myAutoQuote(4000);
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
