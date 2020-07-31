@@ -40,7 +40,7 @@ const quotes = [
 //*** i added a random number funtion to use on the quote generator and color generator  ***
 // random number generator. It takes the highest number as a parameter.
 function getRandomNumber (highNum){
-  let randomNumber = Math.floor(Math.random() * highNum);+ 1; 
+  let randomNumber = Math.floor(Math.random() * highNum);
   return randomNumber;
 }
 
